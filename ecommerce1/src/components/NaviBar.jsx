@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navibar.css'
+import './Navibar.css';
 
 const Navibar = () => {
   return (
@@ -11,13 +11,13 @@ const Navibar = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="nav-item">
-            <Link to="/category/Categoría 1">Xiaomi</Link>
+            <Link to="/category/Xiaomi">Xiaomi</Link>
           </li>
           <li className="nav-item">
-            <Link to="/category/Categoría 2">Samsung</Link>
+            <Link to="/category/Samsung">Samsung</Link>
           </li>
           <li className="nav-item">
-            <Link to="/category/Categoría 3">Iphone</Link>
+            <Link to="/category/Iphone">Iphone</Link>
           </li>
         </ul>
       </nav>

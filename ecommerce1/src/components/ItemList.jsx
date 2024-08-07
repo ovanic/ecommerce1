@@ -22,16 +22,29 @@ const ItemCard = ({ item }) => {
     <div className="item-card">
       <img src={item.image} alt={item.name} className="item-image" />
       <h3>{item.name}</h3>
-      <p>Price: ${item.price}</p>
+      <p>Precio: ${item.price}</p>
       <div className="quantity-container">
-        <button onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
+        <button 
+          onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+          aria-label="Decrease quantity"
+        >
+          -
+        </button>
         <input
           type="number"
+          id={`quantity-${item.id}`}
+          name={`quantity-${item.id}`}
           value={quantity}
           min="1"
           onChange={handleQuantityChange}
+          aria-label={`Quantity for ${item.name}`}
         />
-        <button onClick={() => setQuantity(quantity + 1)}>+</button>
+        <button 
+          onClick={() => setQuantity(quantity + 1)}
+          aria-label="Increase quantity"
+        >
+          +
+        </button>
       </div>
       <p>Total: ${item.price * quantity}</p>
       <button>Agregar al carrito</button>
