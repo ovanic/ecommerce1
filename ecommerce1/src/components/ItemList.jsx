@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ItemList.css';
 
 const ItemList = ({ items }) => {
@@ -13,9 +14,14 @@ const ItemList = ({ items }) => {
 
 const ItemCard = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate(); // Hook para redirección
 
   const handleQuantityChange = (event) => {
     setQuantity(Number(event.target.value));
+  };
+
+  const handleViewDetails = () => {
+    navigate(`/item/${item.id}`); // Redirige a la página de detalles del producto
   };
 
   return (
@@ -47,6 +53,7 @@ const ItemCard = ({ item }) => {
         </button>
       </div>
       <p>Total: ${item.price * quantity}</p>
+      <button onClick={handleViewDetails}>Ver detalles</button> {}
       <button>Agregar al carrito</button>
     </div>
   );

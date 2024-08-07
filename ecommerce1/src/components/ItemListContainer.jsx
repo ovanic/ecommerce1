@@ -1,40 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemList from './ItemList';
+import products from './../asyncmock';
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
-  const { category } = useParams(); 
-
-  const products = [
-    { id: 1, name: 'Pocophone X4', category: 'Xiaomi', price: 500000, image: 'url/to/image1.jpg' },
-    { id: 2, name: 'Redmi Note 13', category: 'Xiaomi', price: 450000, image: 'url/to/image2.jpg' },
-    { id: 3, name: 'Galaxy S21', category: 'Samsung', price: 600000, image: 'url/to/image3.jpg' },
-    { id: 4, name: 'Galaxy S23', category: 'Samsung', price: 700000, image: 'url/to/image4.jpg' },
-    { id: 5, name: 'Iphone 14', category: 'Iphone', price: 800000, image: 'url/to/image5.jpg' },
-    { id: 6, name: 'Iphone 13', category: 'Iphone', price: 650000, image: 'url/to/image6.jpg' },
-  ];
+  const { category } = useParams(); // Obtiene la categoría de la URL
 
   useEffect(() => {
-    
+    // Simulación de llamada asíncrona para obtener productos
     setTimeout(() => {
       if (category) {
-        
-        setItems(products.filter(product => product.category === category));
+        // Filtrar productos por categoría si existe
+        setItems(products.filter(product => product.category === decodeURIComponent(category)));
       } else {
-        
+        // Mostrar todos los productos si no hay categoría
         setItems(products);
       }
-    }, 1000); 
-  }, [category]); 
+    }, 1000); // Simula un retardo de 1 segundo
+  }, [category]); // Dependencia en `category` para actualizar cuando cambie
 
   return (
     <div>
-      <h1>{category ? `Productos en ${category}` : 'Todos los Productos'}</h1>
+      <h1>{category ? `Productos en ${decodeURIComponent(category)}` : 'Todos los Productos'}</h1>
       <ItemList items={items} />
     </div>
   );
 };
 
 export default ItemListContainer;
+
 

@@ -1,22 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ItemDetail from './ItemDetail';
+import products from './../asyncmock';
 
 const ItemDetailContainer = () => {
-  const { id } = useParams();
   const [item, setItem] = useState(null);
+  const { id } = useParams(); // Obtiene el ID del producto desde la URL
 
   useEffect(() => {
-    const fetchItem = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ id, name: `Producto ${id}`, description: `Descripción del producto ${id}` });
-      }, 1000);
-    });
-
-    fetchItem.then(data => setItem(data));
+    // Simulación de llamada asíncrona para obtener un producto por ID
+    setTimeout(() => {
+      const foundItem = products.find(product => product.id === parseInt(id));
+      setItem(foundItem);
+    }, 1000); // Simula un retardo de 1 segundo
   }, [id]);
 
-  return item ? <ItemDetail item={item} /> : <p>Cargando...</p>;
+  if (!item) {
+    return <p>Cargando...</p>; // Mostrar un mensaje mientras se carga el producto
+  }
+
+  return (
+    <div className="item-detail">
+      <img src={item.image} alt={item.name} className="item-detail-image" />
+      <h1>{item.name}</h1>
+      <p>Precio: ${item.price}</p>
+      <p>{item.description}</p>
+      <button>Agregar al carrito</button>
+    </div>
+  );
 };
 
 export default ItemDetailContainer;
+
