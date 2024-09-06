@@ -4,18 +4,18 @@ import products from './../asyncmock';
 
 const ItemDetailContainer = () => {
   const [item, setItem] = useState(null);
-  const { id } = useParams(); // Obtiene el ID del producto desde la URL
+  const { id } = useParams(); 
 
   useEffect(() => {
-    // Simulación de llamada asíncrona para obtener un producto por ID
+    
     setTimeout(() => {
       const foundItem = products.find(product => product.id === parseInt(id));
       setItem(foundItem);
-    }, 1000); // Simula un retardo de 1 segundo
+    }, 1000); 
   }, [id]);
 
   if (!item) {
-    return <p>Cargando...</p>; // Mostrar un mensaje mientras se carga el producto
+    return <p>Cargando...</p>;
   }
 
   return (
